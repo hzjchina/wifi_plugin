@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>配置网关Wi-Fi名称，ios 13以上获取Wifi名称需要定位权限</string>
+	<string>iOS13+ needs to obtain phone location permission to obtain wifi ssid</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>配置网关Wi-Fi名称，ios 13以上获取Wifi名称需要定位权限</string>
+	<string>iOS13+ needs to obtain phone location permission to obtain wifi ssid</string>
 	<key>CFBundleDisplayName</key>
 	<string></string>
 	<key>CFBundleDevelopmentRegion</key>

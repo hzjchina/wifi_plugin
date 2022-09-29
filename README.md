@@ -1,15 +1,17 @@
 # wifi_plugin
 
-A new Flutter project.
+A Flutter project to get current Wifi SSID.
 
-## Getting Started
-
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
 a specialized package that includes platform-specific implementation code for
 Android and/or iOS.
+## Getting Started
+### android
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
+### ios
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>iOS13+ needs to obtain phone location permission to obtain wifi ssid</string>
+<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+<string>iOS13+ needs to obtain phone location permission to obtain wifi ssid</string>
+	
