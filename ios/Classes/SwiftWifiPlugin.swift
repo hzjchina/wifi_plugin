@@ -4,7 +4,9 @@ import SystemConfiguration.CaptiveNetwork
 import NetworkExtension
 import CoreLocation
 
-public class SwiftWifiPlugin: NSObject, FlutterPlugin {
+public class SwiftWifiPlugin: NSObject, FlutterPlugin, CLLocationManagerDelegate {
+
+  fileprivate var locationManager: CLLocationManager!
   public static func register(with registrar: FlutterPluginRegistrar) {
     let channel = FlutterMethodChannel(name: "wifi_plugin", binaryMessenger: registrar.messenger())
     let instance = SwiftWifiPlugin()
@@ -12,18 +14,25 @@ public class SwiftWifiPlugin: NSObject, FlutterPlugin {
   }
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-
+      
       switch(call.method){
       case "getPlatformVersion":
           result("iOS " + UIDevice.current.systemVersion);
           break;
       case "wifiName":
-          if #available(iOS 13.0, *) {
-          setLocationData();
-          }
+         /* if #available(iOS 13.0, *) {
+              setLocationData();
+          }else{
           getSSID {(sSSID) in
                               result(sSSID)
                           }
+          }*/
+//          DispatchQueue.main.async {
+//                     locationManager = CLLocationManager()
+//                     locationManager.delegate = self
+//                     locationManager.desiredAccuracy = kCLLocationAccuracyKilometer//kCLLocationAccuracyNearestTenMeters
+//                 }
+          setLocationData();
           break;
       default:
           //result(FlutterMethodNotImplemented);
@@ -33,7 +42,9 @@ public class SwiftWifiPlugin: NSObject, FlutterPlugin {
 
     private func setLocationData(){
         
-        let locationManager = CLLocationManager();
+        self.locationManager = CLLocationManager();
+        self.locationManager.delegate = self;
+        
         let status: CLAuthorizationStatus?
                 if #available(iOS 14.0, *) {
                     status = locationManager.authorizationStatus
@@ -60,6 +71,8 @@ public class SwiftWifiPlugin: NSObject, FlutterPlugin {
                     }
                 } else {
                     print("other");
+                    
+                    
                 }
         
     }
@@ -79,8 +92,64 @@ public class SwiftWifiPlugin: NSObject, FlutterPlugin {
                        }
                    }
                }
+               print("ssid !")
                result(nil)
            }
+       }
+    
+    /*public func locationManager(_ manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+         if (status == CLAuthorizationStatus.denied) {
+             print("callback denied")
+         } else if (status == CLAuthorizationStatus.authorizedAlways) {
+             print("callback authorizedAlways")
+         }else if(status ==  CLAuthorizationStatus.authorizedWhenInUse){
+             print("callback authorizedWhenInUse")
+         }else if(status == CLAuthorizationStatus.notDetermined){
+             print("callback notDetermined")
+         }else if(status == CLAuthorizationStatus.restricted){
+             print("callback restricted")
+         }
+     }*/
+    
+    
+    /**
+        Method is called after the locationManager requests location and the locationManager was successful at getting the user's location. It will return the user's location by calling the getUsersCurrentLocationCallback
+        - parameter manager:   CLLocationManager
+        - parameter locations: [CLLocation]
+        */
+    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+
+        print("didUpdateLocations")
+       }
+
+       /**
+        Method is called after the locationManager requests location and the locationManager failed at getting the user's location. It will return that there was an error by calling the getUsersCurrentLocationCallback
+        - parameter manager: CLLocationManager
+        - parameter error:   Error
+        */
+    public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+
+        print("didFailWithError")
+       }
+
+       /**
+        Method is called after the user has either authorized or denied location services. It will return the result of this authorization change by calling the isLocationServicedEnabledAndIfNotHandleItCallback.
+        - parameter manager: CLLocationManager
+        - parameter status:  CLAuthorizationStatus
+        */
+    public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+
+        if (status == CLAuthorizationStatus.denied) {
+            print("callback denied")
+        } else if (status == CLAuthorizationStatus.authorizedAlways) {
+            print("callback authorizedAlways")
+        }else if(status ==  CLAuthorizationStatus.authorizedWhenInUse){
+            print("callback authorizedWhenInUse")
+        }else if(status == CLAuthorizationStatus.notDetermined){
+            print("callback notDetermined")
+        }else if(status == CLAuthorizationStatus.restricted){
+            print("callback restricted")
+        }
        }
     
 }
