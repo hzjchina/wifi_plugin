@@ -19,7 +19,7 @@ public class SwiftWifiPlugin: NSObject, FlutterPlugin, CLLocationManagerDelegate
       
       switch(call.method){
       case "getPlatformVersion":
-          result("iOS " + UIDevice.current.systemVersion);
+          result("" + UIDevice.current.systemVersion);
           break;
       case "wifiName":
           if #available(iOS 13.0, *) {
