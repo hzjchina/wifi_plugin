@@ -14,4 +14,6 @@ Android and/or iOS.
 <string>iOS13+ needs to obtain phone location permission to obtain wifi ssid</string>
 <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 <string>iOS13+ needs to obtain phone location permission to obtain wifi ssid</string>
+
+Xcode -> [Project Name] -> Targets -> [Target Name] -> Signing/Capabilities -> Access WiFi Information -> ON
 	
