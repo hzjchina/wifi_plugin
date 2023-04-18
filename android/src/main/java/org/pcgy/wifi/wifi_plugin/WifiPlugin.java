@@ -54,7 +54,7 @@ public class WifiPlugin implements FlutterPlugin, MethodCallHandler, ActivityAwa
     public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
         resultCallBack = result;
         if (call.method.equals("getPlatformVersion")) {
-            result.success("Android " + android.os.Build.VERSION.RELEASE);
+            result.success("" + android.os.Build.VERSION.RELEASE);
         } else if (call.method.equals("wifiName")) {
 
             if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.P)) {
