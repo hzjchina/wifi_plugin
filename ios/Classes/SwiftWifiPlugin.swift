@@ -30,6 +30,9 @@ public class SwiftWifiPlugin: NSObject, FlutterPlugin, CLLocationManagerDelegate
               getWifiName()
           }
           break;
+      case "wifi5G":
+          result(false);
+          break;
       default:
           result(FlutterMethodNotImplemented);
           break;
@@ -56,7 +59,7 @@ public class SwiftWifiPlugin: NSObject, FlutterPlugin, CLLocationManagerDelegate
                     }
                     
                 } else {
-                    print("other");
+                  //  print("other");
                     
                    // getWifiName()
                 }
@@ -77,14 +80,14 @@ public class SwiftWifiPlugin: NSObject, FlutterPlugin, CLLocationManagerDelegate
                     }
                 }
             }
-            print("ssid !")
+           // print("ssid !")
             self.resultCallBack(nil)
         }
     }
     
    
     public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        print(status)
+       // print(status)
         if status == CLAuthorizationStatus.authorizedAlways
             || status ==  CLAuthorizationStatus.authorizedWhenInUse {
             

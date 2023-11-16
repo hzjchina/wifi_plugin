@@ -16,11 +16,12 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
   String _wifiName = "";
+  bool _is5G = false;
 
   @override
   void initState() {
     super.initState();
-    initPlatformState();
+    // initPlatformState();
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
@@ -41,6 +42,16 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       _platformVersion = platformVersion;
     });
+  }
+
+  void getWifi() async{
+
+
+    _is5G =  await WifiPlugin.wifi5G;
+
+    setState(() {
+    });
+
   }
 
   Future<void> test() async{
@@ -74,6 +85,21 @@ class _MyAppState extends State<MyApp> {
             Center(
               child: Text('wifiName: $_wifiName'),
             ),
+            Center(
+              child: Text('is5G: $_is5G'),
+            ),
+            ListTile(
+              // tileColor: Colors.red,
+              // contentPadding: EdgeInsetsGeometry.lerp(a, b, t),
+              title: Text("version"),
+              // subtitle: Text("test"),
+              trailing:Icon(Icons.home),
+              // isThreeLine:true,
+              leading:Icon(Icons.share),
+              onTap: () {
+                initPlatformState();
+              },
+            ),
             ListTile(
               // tileColor: Colors.red,
               // contentPadding: EdgeInsetsGeometry.lerp(a, b, t),
@@ -84,6 +110,18 @@ class _MyAppState extends State<MyApp> {
               leading:Icon(Icons.share),
               onTap: () {
                 test();
+              },
+            ),
+            ListTile(
+              // tileColor: Colors.red,
+              // contentPadding: EdgeInsetsGeometry.lerp(a, b, t),
+              title: Text("is5G"),
+              // subtitle: Text("test"),
+              trailing:Icon(Icons.home),
+              // isThreeLine:true,
+              leading:Icon(Icons.share),
+              onTap: () {
+                getWifi();
               },
             ),
           ]),

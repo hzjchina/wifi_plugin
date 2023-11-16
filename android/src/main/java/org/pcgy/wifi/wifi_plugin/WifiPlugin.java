@@ -66,6 +66,8 @@ public class WifiPlugin implements FlutterPlugin, MethodCallHandler, ActivityAwa
             } else {
                 result.success(getWifiName());
             }
+        }else if(call.method.equals("wifi5G")){
+            result.success(is5G);
         } else {
             result.notImplemented();
         }
@@ -111,8 +113,8 @@ public class WifiPlugin implements FlutterPlugin, MethodCallHandler, ActivityAwa
             }
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                int frequence = info.getFrequency();
-                if (frequence > 4900 && frequence < 5900) {
+                int frequency = info.getFrequency();
+                if (frequency > 4900 && frequency < 5900) {
                     // Connected 5G wifi. Device does not support 5G
                     is5G = true;
                 } else {

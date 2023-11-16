@@ -18,4 +18,11 @@ class WifiPlugin {
 
     return wifiName;
   }
+
+  static Future<bool> get wifi5G async{
+
+    final bool isWifi5G = await _channel.invokeMethod("wifi5G");
+
+    return isWifi5G;
+  }
 }
